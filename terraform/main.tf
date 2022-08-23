@@ -1,8 +1,7 @@
 terraform {
   backend "gcs" {
-    bucket      = "urban-devops-test-terraform"
-    prefix      = "state"
-    credentials = "credentials.json"
+    bucket = "urban-devops-test-terraform"
+    prefix = "state"
   }
   required_providers {
     kubernetes = {
