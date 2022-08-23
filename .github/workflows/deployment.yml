@@ -30,6 +30,10 @@ jobs:
         with:
           workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.SERVICE_ACCOUNT }}
+      
+      - name: Test GCP auth
+        id: test-gcp-auth
+        run: gcloud info
 
       - uses: hashicorp/setup-terraform@v2
 
