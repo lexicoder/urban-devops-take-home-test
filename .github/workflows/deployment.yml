@@ -27,13 +27,12 @@ jobs:
         with:
           workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.SERVICE_ACCOUNT }}
-          
+
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v0'
       
       - name: Test GCP auth
-        id: test-gcp-auth
-        run: gcloud info
+        run: gcloud compute instances list
 
       - uses: hashicorp/setup-terraform@v2
 
