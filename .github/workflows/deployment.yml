@@ -31,8 +31,8 @@ jobs:
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v0'
       
-      # - name: Test GCP auth
-      #   run: gcloud compute instances list
+      - name: Test GCP auth
+        run: gcloud alpha storage ls
 
       - uses: hashicorp/setup-terraform@v2
 
