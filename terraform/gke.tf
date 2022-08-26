@@ -10,6 +10,6 @@ module "gke_cluster" {
   name          = "urban-devops-test"
   region        = var.region
   network       = module.vpc.id
-  instance_type = "e2-medium"
+  instance_type = "e2-micro"
   preemptible   = true
 }
