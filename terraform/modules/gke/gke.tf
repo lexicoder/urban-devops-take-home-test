@@ -20,11 +20,11 @@ resource "google_container_cluster" "this" {
     enabled = true
     resource_limits {
       resource_type = "cpu"
-      minimum       = 4
+      maximum       = 4
     }
     resource_limits {
       resource_type = "memory"
-      minimum       = 64
+      maximum       = 64
     }
   }
 }
