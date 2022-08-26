@@ -1,4 +1,5 @@
 data "google_container_engine_versions" "this" {
+  count          = var.kubernetes_version != "latest" ? 1 : 0
   provider       = google-beta
   location       = var.region
   version_prefix = "${var.kubernetes_version}."
@@ -15,7 +16,7 @@ resource "google_container_cluster" "this" {
   remove_default_node_pool = true
   initial_node_count       = 1
   network                  = try(var.network, null)
-  min_master_version       = data.google_container_engine_versions.this.latest_master_version
+  min_master_version       = try(data.google_container_engine_versions.this[0].latest_master_version, null)
 }
 
 resource "google_container_node_pool" "this" {
