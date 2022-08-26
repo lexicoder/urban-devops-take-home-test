@@ -7,5 +7,8 @@ terraform {
     kubernetes = {
       source = "hashicorp/kubernetes"
     }
+    google = {
+      source = "hashicorp/google"
+    }
   }
 }

@@ -1,6 +1,5 @@
 data "google_container_engine_versions" "this" {
   count          = var.kubernetes_version != "latest" ? 1 : 0
-  provider       = google-beta
   location       = var.region
   version_prefix = "${var.kubernetes_version}."
 }
@@ -17,6 +16,9 @@ resource "google_container_cluster" "this" {
   initial_node_count       = 1
   network                  = try(var.network, null)
   min_master_version       = try(data.google_container_engine_versions.this[0].latest_master_version, null)
+  cluster_autoscaling {
+    enabled = true
+  }
 }
 
 resource "google_container_node_pool" "this" {
