@@ -9,7 +9,10 @@ resource "google_container_cluster" "this" {
   remove_default_node_pool = true
   initial_node_count       = 1
   network                  = try(var.network, null)
-  min_master_version       = var.kubernetes_version
+  #min_master_version       = var.kubernetes_version
+  private_cluster_config {
+    enable_private_nodes = true
+  }
 }
 
 resource "google_container_node_pool" "this" {
