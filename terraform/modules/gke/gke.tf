@@ -18,6 +18,14 @@ resource "google_container_cluster" "this" {
   min_master_version       = try(data.google_container_engine_versions.this[0].latest_master_version, null)
   cluster_autoscaling {
     enabled = true
+    resource_limits {
+      resource_type = "cpu"
+      minimum       = 1
+    }
+    resource_limits {
+      resource_type = "memory"
+      minimum       = 1
+    }
   }
 }
 
