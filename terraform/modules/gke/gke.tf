@@ -8,6 +8,8 @@ resource "google_container_cluster" "this" {
   location                 = var.region
   remove_default_node_pool = true
   initial_node_count       = 1
+  network                  = try(var.network, null)
+  min_master_version       = var.kubernetes_version
 }
 
 resource "google_container_node_pool" "this" {
