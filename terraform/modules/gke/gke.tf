@@ -11,7 +11,8 @@ resource "google_container_cluster" "this" {
   network                  = try(var.network, null)
   #min_master_version       = var.kubernetes_version
   private_cluster_config {
-    enable_private_nodes = true
+    enable_private_nodes    = true
+    enable_private_endpoint = false
   }
 }
 
