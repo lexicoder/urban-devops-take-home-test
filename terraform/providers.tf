@@ -1,4 +1,4 @@
 provider "google" {
-  project = "urban-devops-test"
-  region  = "europe-west4"
+  project = var.project_id
+  region  = var.region
 }
