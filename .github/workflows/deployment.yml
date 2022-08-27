@@ -152,6 +152,10 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+      
+      - name: Sign the published Docker image
+        if: ${{ github.event_name != 'pull_request' }}
+        run: echo "${{ steps.meta.outputs.tags }}" | xargs -I {} cosign sign {}@${{ steps.build-and-push.outputs.digest }}
 
       - name: Set up GKE credentials
         uses: google-github-actions/get-gke-credentials@v0
