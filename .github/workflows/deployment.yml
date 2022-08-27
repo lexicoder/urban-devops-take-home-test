@@ -109,14 +109,12 @@ jobs:
       id-token: 'write'
     steps:
       - uses: actions/checkout@v3
+      
+      - uses: azure/setup-kubectl@v3
         
       - uses: azure/setup-helm@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }} # only needed if version is 'latest'
-        id: install
-      
-      - uses: azure/setup-kubectl@v3
-        id: install
+          token: ${{ secrets.GITHUB_TOKEN }}
         
       - id: auth-gcp
         name: Authenticate to Google Cloud
