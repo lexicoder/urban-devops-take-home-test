@@ -15,11 +15,3 @@ module "gke_cluster" {
   kubernetes_version = "1.22"
   network_cidr       = module.vpc.cidr
 }
-
-data "google_compute_network" "urban_devops_test" {
-  name = "urban-devops-test"
-}
-
-output "network" {
-  value = data.google_compute_network.urban_devops_test
-}

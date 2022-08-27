@@ -10,6 +10,7 @@ resource "google_service_account" "this" {
 }
 
 #tfsec:ignore:google-gke-enforce-pod-security-policy
+#tfsec:ignore:google-gke-enable-private-cluster
 resource "google_container_cluster" "this" {
   name                     = var.name
   location                 = var.region
@@ -20,11 +21,6 @@ resource "google_container_cluster" "this" {
   ip_allocation_policy {}
   resource_labels = {
     "application" = "app"
-  }
-  private_cluster_config {
-    enable_private_nodes    = true
-    enable_private_endpoint = false
-    master_ipv4_cidr_block  = var.network_cidr
   }
   cluster_autoscaling {
     enabled = true
