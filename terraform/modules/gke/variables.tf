@@ -25,6 +25,8 @@ variable "network" {
   description = "The VPC network in which to host the cluster"
 }
 
+variable "network_cidr" {}
+
 variable "kubernetes_version" {
   type        = string
   description = "The Kubernetes version of the masters. If set to 'latest' it will pull latest available version in the selected region."
@@ -79,15 +81,4 @@ variable "grant_registry_access" {
   type        = bool
   description = "Grants created cluster-specific service account storage.objectViewer and artifactregistry.reader roles."
   default     = false
-}
-
-variable "node_pools_tags" {
-  type        = map(list(string))
-  description = "Map of lists containing node network tags by node-pool name"
-
-  # Default is being set in variables_defaults.tf
-  default = {
-    all               = []
-    default-node-pool = []
-  }
 }
