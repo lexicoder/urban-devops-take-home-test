@@ -114,6 +114,9 @@ jobs:
         # with:
           #token: ${{ secrets.GITHUB_TOKEN }} # only needed if version is 'latest'
         id: install
+      
+      - uses: azure/setup-kubectl@v3
+        id: install
         
       - id: auth-gcp
         name: Authenticate to Google Cloud
