@@ -26,6 +26,14 @@ jobs:
       id-token: 'write'
     steps:
       - uses: actions/checkout@v3
+        
+      - name: tfsec
+        uses: aquasecurity/tfsec-action@v1
+      
+      - name: tfsec
+        uses: aquasecurity/tfsec-pr-commenter-action@v1.2.0
+        with:
+          github_token: ${{ github.token }}
 
       - id: auth-gcp
         name: Authenticate to Google Cloud
@@ -158,7 +166,7 @@ jobs:
         if: ${{ github.event_name != 'pull_request' }}
         env:
           COSIGN_EXPERIMENTAL: "true"
-        run: echo "${{ steps.meta.outputs.tags }}" | xargs -I {} cosign sign -oidc-issuer https://token.actions.githubusercontent.com {}@${{ steps.build-and-push.outputs.digest }}
+        run: echo "${{ steps.meta.outputs.tags }}" | xargs -I {} cosign sign --oidc-issuer https://token.actions.githubusercontent.com {}@${{ steps.build-and-push.outputs.digest }}
 
       - name: Set up GKE credentials
         uses: google-github-actions/get-gke-credentials@v0
