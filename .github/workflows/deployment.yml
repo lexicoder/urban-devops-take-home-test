@@ -150,7 +150,8 @@ jobs:
         with:
           context: application
           push: true
-          tags: ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.APP_NAME }}-app:latest
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
 
       - name: Set up GKE credentials
         uses: google-github-actions/get-gke-credentials@v0
