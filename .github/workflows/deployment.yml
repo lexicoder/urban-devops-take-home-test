@@ -143,14 +143,14 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.APP_NAME }}-docker.pkg.dev/${{ env.APP_NAME }}
+          images: ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.APP_NAME }}-app:latest
 
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
           context: application
           push: true
-          tags: ${{ env.APP_NAME }}-docker.pkg.dev/${{ env.APP_NAME }}:latest
+          tags: ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.APP_NAME }}-app:latest
 
       - name: Set up GKE credentials
         uses: google-github-actions/get-gke-credentials@v0
