@@ -122,6 +122,7 @@ jobs:
         name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v0
         with:
+          token_format: 'access_token'
           workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.SERVICE_ACCOUNT }}
 
@@ -130,3 +131,10 @@ jobs:
         with:
           cluster_name: ${{ env.APP_NAME }}
           location: ${{ env.GCP_REGION }}
+
+      - name: Login to GAR
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.APP_NAME }}-docker.pkg.dev
+          username: oauth2accesstoken
+          password: ${{ steps.auth.outputs.access_token }}
