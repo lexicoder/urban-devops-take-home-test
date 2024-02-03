@@ -169,7 +169,7 @@ jobs:
         run: echo "${{ steps.meta.outputs.tags }}" | xargs -I {} cosign sign --oidc-issuer https://token.actions.githubusercontent.com {}@${{ steps.build-and-push.outputs.digest }}
 
       - name: Set up GKE credentials
-        uses: google-github-actions/get-gke-credentials@v0
+        uses: google-github-actions/get-gke-credentials@v2
         with:
           cluster_name: ${{ env.APP_NAME }}
           location: ${{ env.GCP_REGION }}
